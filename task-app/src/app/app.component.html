@@ -1,0 +1,19 @@
+<div style="max-width: 500px; margin: auto;">
+  <h1>Lista de Tareas</h1>
+
+  <div style="margin-bottom: 1em;">
+    <input [(ngModel)]="newTaskTitle" placeholder="Nueva tarea" />
+    <button (click)="addTask()">Agregar</button>
+  </div>
+
+  <ul style="list-style-type: none; padding: 0;">
+    <li *ngFor="let task of tasks" style="display: flex; align-items: center; margin-bottom: 0.5em;">
+      <input type="checkbox" [checked]="task.isCompleted" disabled />
+      <span [style.text-decoration]="task.isCompleted ? 'line-through' : 'none'" style="flex-grow: 1; margin-left: 0.5em;">
+        {{ task.title }}
+      </span>
+      <button (click)="markCompleted(task)" [disabled]="task.isCompleted" style="margin-right: 0.5em;">Marcar como completada</button>
+      <button (click)="deleteTask(task)">Eliminar</button>
+    </li>
+  </ul>
+</div>

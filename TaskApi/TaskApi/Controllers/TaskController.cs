@@ -1,27 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TaskApi.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Task = TaskApi.Models.Task;
 
 namespace TaskApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TareaController : ControllerBase
+    public class TasksController : ControllerBase
     {
-        private static List<Tarea> tasks = new List<Tarea>();
+        private static List<Task> tasks = new List<Task>();
         private static int nextId = 1;
 
         // GET /api/tasks
         [HttpGet]
-        public ActionResult<IEnumerable<Tarea>> GetAll()
+        public ActionResult<IEnumerable<Task>> GetAll()
         {
             return Ok(tasks);
         }
 
         // POST /api/tasks
         [HttpPost]
-        public ActionResult<Tarea> Create(Tarea newTask)
+        public ActionResult<Task> Create(Task newTask)
         {
             newTask.Id = nextId++;
             newTask.IsCompleted = false; // Siempre false al crear
@@ -31,7 +31,7 @@ namespace TaskApi.Controllers
 
         // Helper: GET /api/tasks/{id}
         [HttpGet("{id}")]
-        public ActionResult<Tarea> GetById(int id)
+        public ActionResult<Task> GetById(int id)
         {
             var task = tasks.FirstOrDefault(t => t.Id == id);
             if (task == null)
